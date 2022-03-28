@@ -1,5 +1,3 @@
-nums = [3, 6, 9, 9, 12, 25]
-target = 768
 max_iteration = 5
 operation = {
     "+": lambda a,b: a+b,
@@ -34,7 +32,7 @@ def summle_solver(target: int, nums: list, solution_chain: str = "\n" , iteratio
                 new_nums = nums.copy()
                 new_nums.remove(a)
                 new_nums.remove(b)
-                new_nums.append(new_num)
+                new_nums.insert(0, new_num)
                 
                 result = summle_solver(
                     target=target,
@@ -46,23 +44,25 @@ def summle_solver(target: int, nums: list, solution_chain: str = "\n" , iteratio
                     return result
     return (False, None)
 
-# Maybe not the best optimal solution
-solution_chain = summle_solver(
-    target=target,
-    nums=nums,
-)
-print("\nSolution: ", solution_chain[1], sep="")
 
-if not solution_chain[0]:
-    exit(0)
-
-# Searching for best optimal solution
-for i in range(1, 6):
-    max_iteration = i
+def interface(target: int, nums: list):
+    # Maybe not the best optimal solution
     solution_chain = summle_solver(
         target=target,
         nums=nums,
     )
-    if solution_chain[0]:
-        print("Best solution: ", solution_chain[1], sep="")
-        break
+    print("\nSolution: ", solution_chain[1], sep="")
+
+    if not solution_chain[0]:
+        exit(0)
+
+    # Searching for best optimal solution
+    for i in range(1, 6):
+        max_iteration = i
+        solution_chain = summle_solver(
+            target=target,
+            nums=nums,
+        )
+        if solution_chain[0]:
+            print("Best solution: ", solution_chain[1], sep="")
+            break
