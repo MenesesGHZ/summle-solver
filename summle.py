@@ -1,5 +1,5 @@
-nums = [3, 3, 8, 8, 25, 100]
-target = 540
+nums = [2, 10, 10, 12, 12, 25]
+target = 624
 operation = {
     "+": lambda a,b: a+b,
     "-": lambda a,b: a-b,
@@ -48,9 +48,14 @@ def summle_solver(target: int, nums: list, solution_chain: str = "\n" , iteratio
     return (False, None)
 
 
-solution_chain = summle_solver(
-    target=target,
-    nums=nums,
-)
 
-print(solution_chain[1])
+
+for i in range(1, 5):
+    max_iteration = i
+    solution_chain = summle_solver(
+        target=target,
+        nums=nums,
+    )
+    if solution_chain[0]:
+        print(solution_chain[1])
+        break
