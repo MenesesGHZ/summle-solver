@@ -1,4 +1,3 @@
-max_iteration = 5
 operation = {
     "+": lambda a,b: a+b,
     "-": lambda a,b: a-b,
@@ -6,7 +5,7 @@ operation = {
     "*": lambda a,b: a*b
 }
 
-def summle_solver(target: int, nums: list, solution_chain: str = "\n" , iteration = 0):
+def summle_solver(target: int, nums: list, solution_chain: str = "\n" , iteration = 0, max_iteration = 5):
     if not nums or iteration > max_iteration - 1:
         return (False, None)  
 
@@ -38,11 +37,13 @@ def summle_solver(target: int, nums: list, solution_chain: str = "\n" , iteratio
                     target=target,
                     nums=new_nums,
                     solution_chain=possible_solution_chain,
-                    iteration=iteration+1
+                    iteration=iteration+1,
+                    max_iteration=max_iteration
                 )
                 if result[0]:
                     return result
     return (False, None)
+
 
 
 def interface(target: int, nums: list):
@@ -53,15 +54,19 @@ def interface(target: int, nums: list):
     )
     print("\nSolution: ", solution_chain[1], sep="")
 
+
+
+
+
     if not solution_chain[0]:
         exit(0)
 
     # Searching for best optimal solution
     for i in range(1, 6):
-        max_iteration = i
         solution_chain = summle_solver(
             target=target,
             nums=nums,
+            max_iteration=i
         )
         if solution_chain[0]:
             print("Best solution: ", solution_chain[1], sep="")
